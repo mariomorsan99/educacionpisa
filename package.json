@@ -1,10 +1,7 @@
 {
     "name": "educacion-app",
     "version": "0.0.0",
-    "engines": {
-        "node": ">=10.6.0 <11.0",
-        "npm": ">=6.1.0"
-    },
+    "engines": { "node": ">=10.0.0", "npm": ">=6.0.0" },
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
