@@ -2,7 +2,7 @@
     "name": "educacion-app",
     "version": "0.0.0",
     "engines": {
-        "node": "10.16.x",
+        "node": "6.11.0",
         "npm": "3.10.10"
     },
     "scripts": {
