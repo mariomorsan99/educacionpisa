@@ -120,6 +120,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "EducacionApp"
+    }
+  },
+  "defaultProject": "EducacionApp",
+  "cli": {
+    "analytics": "079febc5-866e-48c9-a86a-18c2f76750e5"
+  }
 }
