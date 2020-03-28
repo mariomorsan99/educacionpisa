@@ -2,8 +2,8 @@
     "name": "educacion-app",
     "version": "0.0.0",
     "engines": {
-        "node": "13.1.0",
-        "npm": "6.12.1",
+        "node": "10.16.0",
+        "npm": "6.9.0",
         "yarn": "1.19.1"
     },
     "scripts": {
@@ -31,6 +31,7 @@
         "express": "^4.17.1",
         "path": "^0.12.7",
         "rxjs": "~6.4.0",
+        "systemjs-nodelibs": "^1.0.0",
         "tslib": "^1.10.0",
         "typescript": "~3.5.3",
         "zone.js": "~0.9.1"
