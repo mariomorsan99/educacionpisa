@@ -7,6 +7,10 @@ import { PagesComponent } from './pages/pages.component';
 import { SharedModule } from '../shared/shared.module';
 import { PAGES_ROUTES } from './pages.router';
 import { BrowserModule } from '@angular/platform-browser';
+import { JapanComponent } from './japan/japan.component';
+import { ChinaComponent } from './china/china.component';
+import { CanadaComponent } from './canada/canada.component';
+import { FinlandiaComponent } from './finlandia/finlandia.component';
 
 
 
@@ -14,7 +18,11 @@ import { BrowserModule } from '@angular/platform-browser';
 @NgModule({
     declarations: [
         PagesComponent,
-        DashboardComponent
+        DashboardComponent,
+        JapanComponent,
+        ChinaComponent,
+        CanadaComponent,
+        FinlandiaComponent
     ],
     exports: [
      PagesComponent,

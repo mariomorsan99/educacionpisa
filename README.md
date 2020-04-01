@@ -25,3 +25,22 @@ Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protrac
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+
+
+para agregar a fire base 
+
+
+en la carpeta principal
+ng build --prod
+firebase login
+firebase init
+firebase deploy
+
+
+ver que el index.html este en la raiz del proyecto  donde se encuentra el archivo package.json
+
+dentro del firebase.json ubicar la carpeta donde se encentran los archivos de ng build --prod
+
+
+ "public": "dist/EducacionApp",
+
