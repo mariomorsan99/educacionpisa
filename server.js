@@ -1,29 +1,57 @@
-const express = require('express');
+// These are important and needed before anything else
+import 'zone.js/dist/zone-node';
+import 'reflect-metadata';
+
+import { renderModuleFactory } from '@angular/platform-server';
+import { enableProdMode } from '@angular/core';
+
+import * as express from 'express';
+import { join } from 'path';
+import { readFileSync } from 'fs';
+
+// Faster server renders w/ Prod mode (dev mode never needed)
+enableProdMode();
+
+// Express server
 const app = express();
-const path = require('path');
 
+const PORT = process.env.PORT || 4201;
+const DIST_FOLDER = join(process.cwd(), 'dist');
 
+// Our index.html we'll use as our template
+const template = readFileSync(join(DIST_FOLDER, 'index.html')).toString();
 
-app.use(express.static(path.join(__dirname, '/EducacionApp/dist')));
+// * NOTE :: leave this as require() since this file is built Dynamically from webpack
+const { AppServerModuleNgFactory, LAZY_MODULE_MAP } = require('./dist-server/main.bundle');
 
+const { provideModuleMap } = require('@nguniversal/module-map-ngfactory-loader');
 
-
-app.get('/*', function(req, res) {
-    res.sendFile(__dirname + '/src/app/app.component.html');
-
+app.engine('html', (_, options, callback) => {
+    renderModuleFactory(AppServerModuleNgFactory, {
+        // Our index.html
+        document: template,
+        url: options.req.url,
+        // DI so that we can get lazy-loading to work differently (since we need it to just instantly render it)
+        extraProviders: [
+            provideModuleMap(LAZY_MODULE_MAP)
+        ]
+    }).then(html => {
+        callback(null, html);
+    });
 });
 
-// app.all('/*', function(req, res, next) {
-//     app.use('/js', express.static(__dirname + '/dist/EducacionApp/assets/js'));
-//     app.use('/css', express.static(__dirname + '/dist/EducacionApp/assets/css'));
-//     // Just send the index.html for other files to support HTML5Mode
-//     res.sendFile('index.html', { root: __dirname + '/dist/EducacionApp/' });
-// });
+app.set('view engine', 'html');
+app.set('views', DIST_FOLDER);
 
-console.log('listeling');
+// Server static files from dist folder
+app.get('*.*', express.static(DIST_FOLDER));
 
-app.listen(process.env.PORT || 4200, () => {
-    console.log(path.join(__dirname + '/src/assets/js'));
-    console.log(path.join(__dirname + '/dist/EducacionApp/index.html'));
-    console.log('Express server puerto 8080: \x1b[32m%s\x1b[0m', 'online');
+// All regular routes use the Universal engine
+app.get('*', (req, res) => {
+    res.render('index', { req });
+});
+
+// Start up the Node server
+app.listen(PORT, () => {
+    console.log(`Node server listening on http://localhost:${PORT}`);
 });
