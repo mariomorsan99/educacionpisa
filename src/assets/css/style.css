@@ -8059,3 +8059,7 @@ File: scss
 .h2-dashboard {
     color: cornflowerblue;
 }
+
+.logo-principal {
+    height: 55px !important;
+}
